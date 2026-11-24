@@ -1,0 +1,8 @@
+# Study toolkit (study/). Install into the project venv:
+#   .venv/bin/pip install -r requirements-study.txt
+# The core prototype needs only pillow and resvg-py.
+pillow==13.0.0
+resvg-py==0.5.0
+numpy==2.5.5
+scipy==1.18.1
+matplotlib==3.11.2

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inside Joke</title>
+<meta name="description" content="Inside Joke makes a kind, funny, personalized GIF for one specific person in about 30 seconds, from public professional facts plus optional conversation context. A CS 85 final project at Harvard, Fall 2026.">
+<meta name="theme-color" content="#f5f0e5">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Inside Joke">
+<meta property="og:description" content="Personalized, kind, funny GIFs for one specific person, made in about 30 seconds. A CS 85 final project and a small experiment on costly signaling.">
+<meta property="og:url" content="https://nahrahel-harvard.github.io/inside-joke/">
+<meta property="og:image" content="https://nahrahel-harvard.github.io/inside-joke/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Inside Joke: three sample GIF posters for fictional prospects next to the project name.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preload" href="assets/data.json" as="fetch" crossorigin>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-userx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m17 8 5 5"/><path d="m22 8-5 5"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><path d="M9 20h6"/><path d="M12 4v16"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-mark" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="6" fill="#b02a1f"/><circle cx="11" cy="13" r="2.4" fill="#fff8ef"/><path d="M18.5 13h5" stroke="#fff8ef" stroke-width="2.6" stroke-linecap="round"/><path d="M9.5 19.5c3.6 4 9.4 4 13 0" fill="none" stroke="#fff8ef" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#main" aria-label="Inside Joke, back to top"><svg aria-hidden="true"><use href="#i-mark"/></svg><span class="brand-name">Inside Joke</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#formats">Formats</a>
+      <a href="#how">How it works</a>
+      <a href="#guardrails">Guardrails</a>
+      <a href="#research">Research</a>
+      <a href="#numbers">Numbers</a>
+      <a href="#run">Run it</a>
+    </nav>
+    <div class="top-actions">
+      <button class="btn btn-quiet" id="motion-toggle" type="button" aria-pressed="false" title="Show still posters instead of animated GIFs">
+        <svg class="ico-pause" aria-hidden="true"><use href="#i-pause"/></svg><svg class="ico-play" aria-hidden="true"><use href="#i-play"/></svg><span class="lbl">Pause GIFs</span><span class="sr"> (show still images)</span>
+      </button>
+      <a class="btn btn-quiet" href="https://github.com/nahrahel-harvard/inside-joke"><svg aria-hidden="true"><use href="#i-github"/></svg><span class="lbl">Repo</span><span class="sr"> on GitHub</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 1. Hero -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">CS 85 &middot; Module 7 final project &middot; Harvard, Fall 2026</p>
+      <h1 id="hero-title">Inside <em>Joke</em></h1>
+      <p class="lede">A tool that makes a short, kind, funny GIF for one specific person. It reads public professional facts plus anything they said in the conversation so far, and it finishes in about 30 seconds.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/nahrahel-harvard/inside-joke"><svg aria-hidden="true"><use href="#i-github"/></svg>View the repo</a>
+        <a class="btn" href="https://github.com/nahrahel-harvard/inside-joke/blob/main/docs/RESEARCH_PLAN.md"><svg aria-hidden="true"><use href="#i-doc"/></svg>Read the research plan</a>
+      </div>
+      <ul class="facts">
+        <li><b>5</b> formats</li>
+        <li><b>~31 s</b> for all 5</li>
+        <li><b>~$0.10</b> per GIF</li>
+        <li>every GIF <b>&lt; 1 MB</b></li>
+      </ul>
+    </div>
+    <figure class="stage" style="margin:0" aria-roledescription="carousel" aria-label="Sample output">
+      <span class="stamp" aria-hidden="true">Real output</span>
+      <div class="stage-frame">
+        <picture id="hero-pic">
+          <source srcset="assets/marcus/headline.png" media="(prefers-reduced-motion: reduce)">
+          <img id="hero-img" src="assets/marcus/headline.gif" width="480" height="624" alt="A newspaper-style front page from an imagined future edition shows a cheerful sales team relaxing at a sunny loading dock on a Friday afternoon, under a headline about their pipeline staying accurate.">
+        </picture>
+      </div>
+      <figcaption class="stage-cap">
+        <span id="hero-cap" aria-live="polite"><strong>Future Headline</strong> for Marcus Chen, VP of Sales at a freight company. Both he and the company are fictional.</span>
+        <span class="stage-dots" id="hero-dots" role="group" aria-label="Choose a sample"></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 2. Formats -->
+<section id="formats" aria-labelledby="formats-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">01</span>
+        <h2 id="formats-title">The 5 formats</h2>
+      </div>
+      <p>Each GIF below is unedited output from one run of the tool, with the email line it wrote to send alongside and the judge's scores. Open "Why this joke" to see which input field every personal detail came from.</p>
+    </div>
+
+    <div class="switch" role="radiogroup" aria-label="Prospect" id="prospect-switch">
+      <button type="button" role="radio" aria-checked="true" data-p="dana">Dana Okafor<span>Beverage manufacturing</span></button>
+      <button type="button" role="radio" aria-checked="false" data-p="marcus" tabindex="-1">Marcus Chen<span>Freight and logistics</span></button>
+    </div>
+    <p class="fiction-note"><svg aria-hidden="true"><use href="#i-info"/></svg><span>Both prospects are fictional. Dana Okafor, Marcus Chen, Brightwater Beverage Co. and Northpeak Logistics were invented for this demo.</span></p>
+
+    <div class="dossier" id="dossier" aria-live="polite">
+      <div class="dossier-id">
+        <p class="eyebrow">Input file</p>
+        <h3>Dana Okafor</h3>
+        <p class="role">Director of Supply Chain Planning, Brightwater Beverage Co.</p>
+        <p class="dossier-run">All 5 formats in <b>30.4 s</b> &middot; <b>$0.48</b> total</p>
+      </div>
+      <dl class="dossier-fields">
+        <div><dt>industry</dt><dd>Beverage manufacturing</dd></div>
+        <div><dt>linkedin_headline</dt><dd>S&amp;OP nerd. Turning forecasts into cases on shelves.</dd></div>
+        <div><dt>notes</dt><dd>Hiring 3 demand planners this quarter. Posted on LinkedIn that their weekly S&amp;OP meeting ran 3 hours. Launching a sparkling tea line in Q1.</dd></div>
+        <div class="ctx"><dt>conversation</dt><dd>Dana replied to our first email: &quot;Interesting timing, but we&#x27;re in the middle of an ERP migration until March. Circle back in Q2?&quot;</dd></div>
+      </dl>
+    </div>
+
+    <noscript><span class="nojs">JavaScript is off, so this list shows Dana's 5 GIFs without scores or grounding. The full data is in <a href="assets/data.json">assets/data.json</a>.</span></noscript>
+    <div class="formats" id="cards">
+      <article class="fmt" id="fmt-meme">
+        <div class="fmt-media"><picture><source srcset="assets/dana/meme.png" media="(prefers-reduced-motion: reduce)"><img src="assets/dana/meme.gif" data-p="dana" data-f="meme" width="480" height="480" alt="A cartoon glass of sparkling tea with a weary face sits alone and flat at the end of a long conference table." loading="lazy"></picture></div>
+        <div class="fmt-body">
+          <div class="fmt-kicker"><span class="n">01</span><span class="k">Square &middot; 113 KB &middot; 22.6 s</span></div>
+          <h3>Meme Desk</h3>
+          <p class="fmt-pitch">An original 2-beat meme: setup on top, punchline drops in. Classic meme grammar, new art every time.</p>
+          <div class="email"><div class="email-head"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email line it wrote</div><p>Happy to circle back in Q2, Dana. Meanwhile, here&#x27;s a tribute to the three-hour S&amp;OP meeting.</p></div>
+        </div>
+      </article>
+      <article class="fmt" id="fmt-headline">
+        <div class="fmt-media"><picture><source srcset="assets/dana/headline.png" media="(prefers-reduced-motion: reduce)"><img src="assets/dana/headline.gif" data-p="dana" data-f="headline" width="480" height="624" alt="A newspaper-style front page from an imagined future edition shows cheerful planners leaving a meeting room early with sparkling tea, under a headline about an S&amp;OP meeting ending early." loading="lazy"></picture></div>
+        <div class="fmt-body">
+          <div class="fmt-kicker"><span class="n">02</span><span class="k">Front page &middot; 228 KB &middot; 27.1 s</span></div>
+          <h3>Future Headline</h3>
+          <p class="fmt-pitch">A trade-paper front page dated 6 months ahead, reporting the win this person is working toward. Clearly marked as an imagined edition.</p>
+          <div class="email"><div class="email-head"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email line it wrote</div><p>Happy to wait for Q2; here&#x27;s a headline from the future to enjoy while the ERP migration wraps up.</p></div>
+        </div>
+      </article>
+      <article class="fmt" id="fmt-comic">
+        <div class="fmt-media"><picture><source srcset="assets/dana/comic.png" media="(prefers-reduced-motion: reduce)"><img src="assets/dana/comic.gif" data-p="dana" data-f="comic" width="720" height="330" alt="A three-panel illustrated strip of a planner whose one-hour meeting drags on, then ends with colleagues giving the forecast a standing ovation." loading="lazy"></picture></div>
+        <div class="fmt-body">
+          <div class="fmt-kicker"><span class="n">03</span><span class="k">Strip &middot; 269 KB &middot; 30.4 s</span></div>
+          <h3>Three-Panel Day</h3>
+          <p class="fmt-pitch">A 3-panel strip about one real pain from their role, ending on a kind twist. Panels reveal one at a time.</p>
+          <div class="email"><div class="email-head"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email line it wrote</div><p>Made this for your S&amp;OP marathons, no reply needed. Q2 is perfect, and good luck with the migration.</p></div>
+        </div>
+      </article>
+      <article class="fmt" id="fmt-card">
+        <div class="fmt-media"><picture><source srcset="assets/dana/card.png" media="(prefers-reduced-motion: reduce)"><img src="assets/dana/card.gif" data-p="dana" data-f="card" width="400" height="560" alt="A holographic collector card showing a pallet-and-bottle owl guarding a scaffolded castle, titled Keeper of Q2, with playful planning stats and a Circle Back in Q2 special move." loading="lazy"></picture></div>
+        <div class="fmt-body">
+          <div class="fmt-kicker"><span class="n">04</span><span class="k">Card &middot; 392 KB &middot; 28.0 s</span></div>
+          <h3>Collector Card</h3>
+          <p class="fmt-pitch">A holographic collectible card for their professional persona: nickname, stats, special move. Shimmer loops forever.</p>
+          <div class="email"><div class="email-head"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email line it wrote</div><p>Totally fair on March. Made you a collectible for the migration trenches; I&#x27;ll circle back in Q2.</p></div>
+        </div>
+      </article>
+      <article class="fmt" id="fmt-reply">
+        <div class="fmt-media"><picture><source srcset="assets/dana/reply.png" media="(prefers-reduced-motion: reduce)"><img src="assets/dana/reply.gif" data-p="dana" data-f="reply" width="480" height="480" alt="A sleepy wall clock under a tiny blanket sits in a conference room while a friendly hard-hat box waves, with captions about waiting until April." loading="lazy"></picture></div>
+        <div class="fmt-body">
+          <div class="fmt-kicker"><span class="n">05</span><span class="k">Square &middot; 163 KB &middot; 26.4 s</span></div>
+          <h3>Reply Reaction</h3>
+          <p class="fmt-pitch">Reacts to what the prospect actually said in the thread. Their words become the setup; an animated prop delivers the beat.</p>
+          <div class="email"><div class="email-head"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email line it wrote</div><p>Totally understood on the ERP timing, so I made this to keep you company while March passes.</p></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 3. How it works -->
+<section id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">02</span>
+        <h2 id="how-title">How it works</h2>
+      </div>
+      <p>Generative models are non-deterministic: the same facts and the same prompt give a different joke each time. The pipeline uses models where variety helps and ordinary code wherever the answer must be exact.</p>
+    </div>
+
+    <ul class="legend" aria-label="Legend">
+      <li><span class="chip chip-model"><svg aria-hidden="true"><use href="#i-dice"/></svg>Model</span> non-deterministic: a model call, output varies run to run</li>
+      <li><span class="chip chip-code"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</span> deterministic: same input, same output, every time</li>
+    </ul>
+
+    <ol class="flow" aria-label="Pipeline, in order">
+      <li class="is-input">
+        <span class="dot" aria-hidden="true">In</span>
+        <div class="node">
+          <div class="node-head"><span class="chip" style="box-shadow: inset 0 0 0 1px var(--ink)">Input</span><h3>Prospect facts and optional context</h3></div>
+          <p>A small JSON file: name, title, company, industry, LinkedIn headline and notes. Optionally, a line from the conversation so far, such as a reply to the first email.</p>
+        </div>
+      </li>
+      <li class="is-model">
+        <span class="dot" aria-hidden="true">1</span>
+        <div class="node">
+          <div class="node-head"><span class="chip chip-model"><svg aria-hidden="true"><use href="#i-dice"/></svg>Model</span><h3>3 writers in parallel</h3></div>
+          <p>Three calls run at once at temperature 1.0, each told to use a different humor mechanism, so the 3 drafts differ by design. Each draft returns the on-image words, an art prompt, an email line, alt text and a grounding list.</p>
+          <div class="lanes">
+            <div class="lane"><b>callback</b>builds on their own words from the conversation</div>
+            <div class="lane"><b>incongruity</b>sets up the expected day, swaps in a surprise</div>
+            <div class="lane"><b>personification</b>a meeting or tool from their job has feelings</div>
+          </div>
+        </div>
+      </li>
+      <li class="is-code">
+        <span class="dot" aria-hidden="true">2</span>
+        <div class="node">
+          <div class="node-head"><span class="chip chip-code"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</span><h3>Deterministic guardrails</h3></div>
+          <ul>
+            <li>Required fields present, word limits kept</li>
+            <li>Banned-topic word filter</li>
+            <li>Every grounding entry cites a real input field</li>
+            <li>First name used at most once</li>
+            <li>If nothing passes, write a fresh round</li>
+          </ul>
+        </div>
+      </li>
+      <li class="is-model">
+        <span class="dot" aria-hidden="true">3</span>
+        <div class="node">
+          <div class="node-head"><span class="chip chip-model"><svg aria-hidden="true"><use href="#i-dice"/></svg>Model</span><h3>Cross-family judge</h3></div>
+          <p>A model from a different company than the writer scores each passing draft from 1 to 10 on funny, specific, kind and glance, at temperature 0. The weighted total picks the winner. A kind score under 7 removes a draft outright. Using another vendor's model is meant to reduce a model's preference for its own writing.</p>
+        </div>
+      </li>
+      <li class="is-model">
+        <span class="dot" aria-hidden="true">4</span>
+        <div class="node">
+          <div class="node-head"><span class="chip chip-model"><svg aria-hidden="true"><use href="#i-dice"/></svg>Model</span><h3>Art, with 2 fallbacks</h3></div>
+          <p>The art prompt asks for an original scene with no words, letters or numbers and no likeness of a real person. If the image model fails, the next backend takes over, so a run always finishes.</p>
+          <div class="chain" aria-label="Art fallback order">
+            <span class="step m">Image model</span><svg aria-hidden="true"><use href="#i-arrow"/></svg>
+            <span class="step m">SVG drawn by a text model, sanitized</span><svg aria-hidden="true"><use href="#i-arrow"/></svg>
+            <span class="step c">Gradient placeholder (code)</span>
+          </div>
+        </div>
+      </li>
+      <li class="is-code">
+        <span class="dot" aria-hidden="true">5</span>
+        <div class="node">
+          <div class="node-head"><span class="chip chip-code"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</span><h3>Code draws every word and frame</h3></div>
+          <p>Python lays out the text, fits it to the box and animates it. For motion, the model only picks a named prop from a short list (<code>calendar_flip</code>, <code>progress_bar</code>, <code>stamp</code>) and code draws it. The same inputs always produce the same GIF bytes, which is what makes the renderer testable.</p>
+        </div>
+      </li>
+      <li class="is-code">
+        <span class="dot" aria-hidden="true">6</span>
+        <div class="node">
+          <div class="node-head"><span class="chip chip-code"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</span><h3>GIF and PNG poster</h3></div>
+          <p>The encoder keeps each GIF under a 1 MB budget and saves the final frame as a PNG poster. The first frame already shows the whole joke, for email clients that display only frame 1.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="rule-line">
+      <p class="eyebrow">Design rule</p>
+      <p>Models do the parts where variety is the point: the joke and the picture. Anything that must be exact, such as spelling, limits, safety rules and animation, is ordinary code.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Guardrails -->
+<section id="guardrails" aria-labelledby="guard-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">03</span>
+        <h2 id="guard-title">Guardrails</h2>
+      </div>
+      <p>A joke written about one person can go wrong in more ways than a generic one. These rules apply to every draft, and most of them are plain code that gives the same verdict every time.</p>
+    </div>
+    <div class="rails" style="grid-auto-flow: dense">
+      <article class="rail">
+        <svg class="ico" aria-hidden="true"><use href="#i-target"/></svg>
+        <h3>The job is the target</h3>
+        <p>Every draft names its target: a shared enemy of the job, such as a meeting, a tool, a metric or a season. The reader is in on the joke and never its subject.</p>
+        <p class="where">joke_target field, writer rules</p>
+      </article>
+      <article class="rail rail-wide">
+        <svg class="ico" aria-hidden="true"><use href="#i-ban"/></svg>
+        <h3>Banned topics</h3>
+        <p>A word filter in code rejects any draft that touches these subjects, in the image text or the email line. The writer is also told to leave out the employer's bad news.</p>
+        <ul class="topics" aria-label="Banned topics">
+          <li>appearance</li><li>age</li><li>health</li><li>death</li><li>pregnancy</li><li>divorce</li><li>religion</li><li>politics</li><li>race</li><li>layoffs</li><li>lawsuits</li><li>drinking</li><li>sexual content</li>
+        </ul>
+      </article>
+      <article class="rail">
+        <svg class="ico" aria-hidden="true"><use href="#i-link"/></svg>
+        <h3>Every detail cites its field</h3>
+        <p>Each personal detail lists the input field it came from. A draft that cites a field the input does not have is rejected, so the tool cannot invent a promotion, a number or a quote.</p>
+        <p class="where">grounding list, checked in code</p>
+      </article>
+      <article class="rail">
+        <svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg>
+        <h3>Kind below 7 never ships</h3>
+        <p>The judge scores kindness from 1 to 10. A draft under 7 is dropped however funny it is. If every draft falls under 7, the run fails for that format.</p>
+        <p class="where">judge score, applied in code</p>
+      </article>
+      <article class="rail">
+        <svg class="ico" aria-hidden="true"><use href="#i-userx"/></svg>
+        <h3>No likeness of real people</h3>
+        <p>Art shows generic stylized characters or objects with feelings. The prompt forbids drawing the reader, and the SVG path strips any embedded image.</p>
+        <p class="where">art prompt rules, SVG sanitizer</p>
+      </article>
+      <article class="rail">
+        <svg class="ico" aria-hidden="true"><use href="#i-type"/></svg>
+        <h3>Code spells the names</h3>
+        <p>The image model is told to draw no text at all. Python draws every letter, so a name or a company appears exactly as it was typed.</p>
+        <p class="where">render.py</p>
+      </article>
+      <article class="rail rail-wide">
+        <svg class="ico" aria-hidden="true"><use href="#i-eye"/></svg>
+        <h3>A person reads it first</h3>
+        <p>Nothing goes to a real person without human review. In the study, I read every item before it is sent and log any I hold back, with the reason. The tool produces a draft; a human decides whether it is sent.</p>
+        <p class="where">study protocol, stimulus screening log</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Research -->
+<section id="research" aria-labelledby="research-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">04</span>
+        <h2 id="research-title">The research question</h2>
+      </div>
+      <p>Inside Joke is the instrument for a small experiment. When a personal gesture costs almost nothing to make, do people still read it as effort? And what changes when they are told AI made it?</p>
+    </div>
+
+    <div class="theory">
+      <article>
+        <h3>Costly signaling</h3>
+        <p>A personalized gift works as a signal because it is costly to fake: it shows the sender spent time on you. AI makes that time nearly free. The study asks whether the signal still lands, and whether disclosing the AI changes how it reads.</p>
+        <cite>Spence 1973; Camerer 1988; Kruger et al. 2004</cite>
+      </article>
+      <article>
+        <h3>Benign violation</h3>
+        <p>Something is funny when it breaks an expectation and still feels safe. A joke about someone's job sits close to that line, and the guardrails exist to keep it on the safe side.</p>
+        <cite>McGraw and Warren 2010; Eisend 2009</cite>
+      </article>
+      <article>
+        <h3>Personalization and creepiness</h3>
+        <p>Personal details can read as care or as surveillance. Highly personalized messages draw pushback when the reader cannot see why the sender knows so much.</p>
+        <cite>White et al. 2008; Aguirre et al. 2015</cite>
+      </article>
+    </div>
+
+    <div class="hyp-wrap">
+      <div>
+        <p class="eyebrow">Fixed before data collection</p>
+        <ol class="hyps">
+          <li><span class="tag">H1</span><span><b>Personal reads as effort.</b><span class="d">People rate a personalized GIF as more effort than a generic GIF.</span></span></li>
+          <li><span class="tag">H2</span><span><b>Disclosure shrinks the gap.</b><span class="d">That effort gap is smaller for people told an AI tool made the item in about 20 seconds.</span></span></li>
+          <li><span class="tag">H3</span><span><b>Personal also feels creepier.</b><span class="d">People rate the personalized GIF as creepier than the generic GIF.</span></span></li>
+          <li><span class="tag">H4</span><span><b>The image adds humor.</b><span class="d">The personalized GIF is rated funnier than a personalized joke sent as plain text.</span></span></li>
+          <li><span class="tag">M1</span><span><b>Does the judge agree with people?</b><span class="d">For funny, specific, kind and glance, compare the model judge's scores with human ratings. A Spearman correlation of at least .40 counts as useful.</span></span></li>
+        </ol>
+      </div>
+      <div class="design">
+        <p class="eyebrow">Study design</p>
+        <h3>3 items, 2 arms, about 30 people</h3>
+        <p>About 30 classmates and friends each type 6 facts about their role, or a persona, and later rate 3 items on 1 to 7 scales: a personalized GIF, a personalized text-only joke and a generic GIF. Half see a label under each item saying an AI tool made it in about 20 seconds, and half see no label. The hypotheses, exclusion rules and analysis were written down before any data came in, and I read every item before it is sent.</p>
+        <div class="results" role="note" aria-label="Results placeholder">
+          <p class="eyebrow">Results placeholder</p>
+          <p>Study runs Nov 30 to Dec 2, 2026. Results will appear here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Numbers -->
+<section id="numbers" aria-labelledby="numbers-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">05</span>
+        <h2 id="numbers-title">Measured numbers</h2>
+      </div>
+      <p>Timed and priced from every real run on the 2 prospects above. Every model call is logged with its duration, tokens and cost.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="big num">30 to 32<small> s</small></div><p>All 5 formats, wall clock, run in parallel</p></div>
+      <div class="stat"><div class="big num">22 to 32<small> s</small></div><p>Per format, from facts to finished GIF</p></div>
+      <div class="stat"><div class="big num">113 to 392<small> KB</small></div><p>Per GIF, all under the 1 MB budget</p></div>
+      <div class="stat"><div class="big num">$0.10</div><p>About this much per GIF. Image calls are about $0.067 each</p></div>
+      <div class="stat"><div class="big num">15.6 to 16.9<small> s</small></div><p>Per GIF in fast mode (cheaper writer, no judge), at about $0.067 each</p></div>
+      <div class="stat"><div class="big num">0.05 to 0.08<small> s</small></div><p>Offline rendering per GIF, with no model calls</p></div>
+    </div>
+
+    <div class="lessons-head">
+      <p class="eyebrow">3 lessons from the build log</p>
+    </div>
+    <div class="lessons">
+      <article class="lesson">
+        <h3>The first version returned only <code>{"</code></h3>
+        <dl>
+          <dt>What happened</dt>
+          <dd>Writer calls came back as 2 characters. The model's reasoning tokens counted against the output limit: 689 of 800 tokens went to reasoning, and the reply stopped just after it opened the JSON.</dd>
+          <dt>Fix</dt>
+          <dd>A separate reasoning budget of 1,024 tokens on top of the answer's own limit, plus a check that raises an error when a reply is cut off.</dd>
+        </dl>
+      </article>
+      <article class="lesson">
+        <h3>A guardrail rejected a good meme for "old"</h3>
+        <dl>
+          <dt>What happened</dt>
+          <dd>The banned-word filter included "old" as an age word, so it threw out a meme for Dana about "the old spreadsheet".</dd>
+          <dt>Fix</dt>
+          <dd>Removed "old" and "fired" from the list. Age jokes are still caught by other words and by the judge's kind score. The case is kept as a regression test: <code>test_regression_old_and_fired_are_allowed</code>.</dd>
+        </dl>
+      </article>
+      <article class="lesson">
+        <h3>Comic panels came back as grids</h3>
+        <dl>
+          <dt>What happened</dt>
+          <dd>The image model drew a small comic grid inside each of the 3 panels. The image prompt itself used the word "panels", and the model took it literally.</dd>
+          <dt>Fix</dt>
+          <dd>Each format now has a separate composition line written only for the image model, plus a grid detector that asks for one redraw when it spots a grid. It raised 0 false alarms on 25 single-scene images.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Run it -->
+<section id="run" aria-labelledby="run-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">06</span>
+        <h2 id="run-title">Run it yourself</h2>
+      </div>
+      <p>Three commands from a clone of the repo. Output lands in a new folder under <code>out/</code>, with each GIF, its PNG poster and a manifest.</p>
+    </div>
+    <div class="run">
+      <div class="term">
+        <div class="term-bar"><span>inside-joke</span><span>zsh</span></div>
+        <ol>
+          <li><span><span class="cmt"># install dependencies</span><code>make setup</code></span><button class="copy" type="button" data-copy="make setup" aria-label="Copy command: make setup"><svg class="cp" aria-hidden="true"><use href="#i-copy"/></svg><svg class="ok" aria-hidden="true"><use href="#i-check"/></svg></button></li>
+          <li><span><span class="cmt"># make all 5 formats for the Dana example</span><code>python forge.py examples/dana_brightwater.json --format all</code></span><button class="copy" type="button" data-copy="python forge.py examples/dana_brightwater.json --format all" aria-label="Copy command: python forge.py examples/dana_brightwater.json --format all"><svg class="cp" aria-hidden="true"><use href="#i-copy"/></svg><svg class="ok" aria-hidden="true"><use href="#i-check"/></svg></button></li>
+          <li><span><span class="cmt"># open the local web form</span><code>python serve.py</code></span><button class="copy" type="button" data-copy="python serve.py" aria-label="Copy command: python serve.py"><svg class="cp" aria-hidden="true"><use href="#i-copy"/></svg><svg class="ok" aria-hidden="true"><use href="#i-check"/></svg></button></li>
+        </ol>
+      </div>
+      <div class="run-notes">
+        <p class="note">This page does not host a live generator. Each run calls paid model APIs with a private key, so the tool runs on your own machine with your own key.</p>
+        <p>The model calls go through OpenRouter: an Anthropic model writes, a Google model judges and a Google image model draws. Set <code>OPENROUTER_API_KEY</code> in your environment or a <code>.env</code> file first.</p>
+        <p>No key yet? The test suite renders all 5 formats offline with placeholder art in well under a second each.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#main"><svg aria-hidden="true"><use href="#i-mark"/></svg>Inside Joke</a>
+    <ul>
+      <li>CS 85, Fall 2026, Harvard</li>
+      <li>MIT license</li>
+      <li><a href="https://github.com/nahrahel-harvard/inside-joke">github.com/nahrahel-harvard/inside-joke</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

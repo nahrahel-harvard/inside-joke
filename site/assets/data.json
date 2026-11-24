@@ -1,0 +1,466 @@
+{
+ "prospects": {
+  "dana": {
+   "prospect": {
+    "first_name": "Dana",
+    "last_name": "Okafor",
+    "title": "Director of Supply Chain Planning",
+    "company": "Brightwater Beverage Co.",
+    "industry": "Beverage manufacturing",
+    "linkedin_headline": "S&OP nerd. Turning forecasts into cases on shelves.",
+    "notes": "Hiring 3 demand planners this quarter. Posted on LinkedIn that their weekly S&OP meeting ran 3 hours. Launching a sparkling tea line in Q1."
+   },
+   "context": "Dana replied to our first email: \"Interesting timing, but we're in the middle of an ERP migration until March. Circle back in Q2?\"",
+   "total_seconds": 30.4,
+   "cost_usd": 0.47613,
+   "formats": {
+    "meme": {
+     "email_line": "Happy to circle back in Q2, Dana. Meanwhile, here's a tribute to the three-hour S&OP meeting.",
+     "alt_text": "A cartoon glass of sparkling tea with a weary face sits alone and flat at the end of a long conference table.",
+     "mechanism": "incongruity",
+     "joke_target": "the marathon weekly S&OP meeting",
+     "grounding": [
+      {
+       "fact": "Weekly S&OP meeting ran 3 hours (her own LinkedIn post)",
+       "field": "notes"
+      },
+      {
+       "fact": "Sparkling tea line launching in Q1",
+       "field": "notes"
+      },
+      {
+       "fact": "S&OP is her world ('S&OP nerd')",
+       "field": "linkedin_headline"
+      },
+      {
+       "fact": "Agreed to circle back in Q2, ERP migration until March",
+       "field": "conversation"
+      }
+     ],
+     "text": {
+      "top": "A QUICK WEEKLY S&OP, THEY SAID.",
+      "bottom": "EVEN THE SPARKLING TEA WENT FLAT."
+     },
+     "scores": {
+      "funny": 8,
+      "specific": 9,
+      "kind": 9,
+      "glance": 8,
+      "total": 8.45
+     },
+     "gif_kb": 113,
+     "seconds": 22.62,
+     "art_backend": "image"
+    },
+    "headline": {
+     "email_line": "Happy to wait for Q2; here's a headline from the future to enjoy while the ERP migration wraps up.",
+     "alt_text": "A newspaper-style front page from an imagined future edition shows cheerful planners leaving a meeting room early with sparkling tea, under a headline about an S&OP meeting ending early.",
+     "mechanism": "incongruity",
+     "joke_target": "the three-hour weekly S&OP meeting",
+     "grounding": [
+      {
+       "fact": "Weekly S&OP meeting ran 3 hours (the expected version, swapped for an early finish)",
+       "field": "notes"
+      },
+      {
+       "fact": "Sparkling tea line launching in Q1",
+       "field": "notes"
+      },
+      {
+       "fact": "Hiring 3 demand planners this quarter",
+       "field": "notes"
+      },
+      {
+       "fact": "S&OP focus, forecasts to cases on shelves",
+       "field": "linkedin_headline"
+      },
+      {
+       "fact": "ERP migration until March, circle back in Q2",
+       "field": "conversation"
+      }
+     ],
+     "text": {
+      "publication": "The Case Count Gazette",
+      "kicker": "Imagined Future Edition",
+      "headline": "S&OP Meeting Ends Early; Attendees Unsure What To Do With Daylight",
+      "dek": "Sparkling tea lands on forecast, three new planners get lunch, and the three-hour slot becomes a walk."
+     },
+     "scores": {
+      "funny": 8,
+      "specific": 9,
+      "kind": 10,
+      "glance": 8,
+      "total": 8.6
+     },
+     "gif_kb": 228,
+     "seconds": 27.07,
+     "art_backend": "image"
+    },
+    "comic": {
+     "email_line": "Made this for your S&OP marathons, no reply needed. Q2 is perfect, and good luck with the migration.",
+     "alt_text": "A three-panel illustrated strip of a planner whose one-hour meeting drags on, then ends with colleagues giving the forecast a standing ovation.",
+     "mechanism": "incongruity",
+     "joke_target": "the meeting that was only supposed to take an hour",
+     "grounding": [
+      {
+       "fact": "Weekly S&OP meeting ran 3 hours (hour-by-hour structure of the strip)",
+       "field": "notes"
+      },
+      {
+       "fact": "S&OP is central to her identity (consensus on the forecast as the happy ending)",
+       "field": "linkedin_headline"
+      },
+      {
+       "fact": "Q2 timing and ERP migration acknowledged in the email line",
+       "field": "conversation"
+      }
+     ],
+     "text": {
+      "captions": [
+       "Monday, 9 a.m. S&OP begins. The plan: one tidy hour.",
+       "Hour two: someone says \"quick question.\" The coffee gives up.",
+       "Hour three: everyone agrees, and the forecast gets a standing ovation."
+      ],
+      "cast": "A friendly stylized planner with round glasses, short curly hair, a mustard cardigan, and a green mug, drawn in flat warm colors."
+     },
+     "scores": {
+      "funny": 8,
+      "specific": 9,
+      "kind": 10,
+      "glance": 8,
+      "total": 8.6
+     },
+     "gif_kb": 269,
+     "seconds": 30.4,
+     "art_backend": "image"
+    },
+    "card": {
+     "email_line": "Totally fair on March. Made you a collectible for the migration trenches; I'll circle back in Q2.",
+     "alt_text": "A holographic collector card showing a pallet-and-bottle owl guarding a scaffolded castle, titled Keeper of Q2, with playful planning stats and a Circle Back in Q2 special move.",
+     "mechanism": "callback",
+     "joke_target": "ERP migration pushing everything to Q2",
+     "grounding": [
+      {
+       "fact": "'in the middle of an ERP migration until March' and 'Circle back in Q2?'",
+       "field": "conversation"
+      },
+      {
+       "fact": "weekly S&OP meeting ran 3 hours",
+       "field": "notes"
+      },
+      {
+       "fact": "turning forecasts into cases on shelves",
+       "field": "linkedin_headline"
+      },
+      {
+       "fact": "Director of Supply Chain Planning",
+       "field": "title"
+      },
+      {
+       "fact": "sparkling tea line launching Q1",
+       "field": "notes"
+      }
+     ],
+     "text": {
+      "card_title": "Keeper of Q2",
+      "card_class": "Planning Archmage",
+      "stats": [
+       {
+        "label": "Patience Till March",
+        "value": 99
+       },
+       {
+        "label": "Meeting Stamina",
+        "value": 95
+       },
+       {
+        "label": "Cases on Shelves",
+        "value": 88
+       }
+      ],
+      "special_move": {
+       "name": "Circle Back in Q2",
+       "text": "Politely moves every request past the ERP migration. Survivors reappear in April."
+      },
+      "flavor": "Forged in three-hour S&OP meetings. Patient until March."
+     },
+     "scores": {
+      "funny": 8,
+      "specific": 9,
+      "kind": 9,
+      "glance": 8,
+      "total": 8.45
+     },
+     "gif_kb": 392,
+     "seconds": 28.02,
+     "art_backend": "image"
+    },
+    "reply": {
+     "email_line": "Totally understood on the ERP timing, so I made this to keep you company while March passes.",
+     "alt_text": "A sleepy wall clock under a tiny blanket sits in a conference room while a friendly hard-hat box waves, with captions about waiting until April.",
+     "mechanism": "incongruity",
+     "joke_target": "ERP timelines and marathon S&OP meetings",
+     "grounding": [
+      {
+       "fact": "ERP migration until March; circle back in Q2",
+       "field": "conversation"
+      },
+      {
+       "fact": "weekly S&OP meeting ran 3 hours",
+       "field": "notes"
+      }
+     ],
+     "text": {
+      "beat1": "ERP migration until March? Take your time.",
+      "beat2": "April arrives faster than a three-hour S&OP meeting. Promise.",
+      "prop": "calendar_flip",
+      "prop_value": "APR"
+     },
+     "scores": {
+      "funny": 8,
+      "specific": 9,
+      "kind": 8,
+      "glance": 8,
+      "total": 8.3
+     },
+     "gif_kb": 163,
+     "seconds": 26.45,
+     "art_backend": "image"
+    }
+   }
+  },
+  "marcus": {
+   "prospect": {
+    "first_name": "Marcus",
+    "last_name": "Chen",
+    "title": "VP of Sales",
+    "company": "Northpeak Logistics",
+    "industry": "Freight and logistics",
+    "linkedin_headline": "Building a sales team that actually likes Mondays.",
+    "notes": "Sales team doubled from 12 to 24 reps this year. Uses Salesforce. Posted that reps lose Friday afternoons to pipeline updates."
+   },
+   "context": "On our intro call Marcus said Friday pipeline updates are \"the worst 2 hours of the week\" and asked us to send something he can forward to his CRO.",
+   "total_seconds": 31.76,
+   "cost_usd": 0.47598,
+   "formats": {
+    "meme": {
+     "email_line": "Here's the forwardable you asked for: Friday pipeline updates, finally given a personality.",
+     "alt_text": "A smiling cartoon clipboard waves cheerfully in an office aisle while slumped, weary coworkers sit at their desks.",
+     "mechanism": "personification",
+     "joke_target": "Friday afternoon pipeline updates",
+     "grounding": [
+      {
+       "fact": "Sales team doubled from 12 to 24 reps",
+       "field": "notes"
+      },
+      {
+       "fact": "Friday pipeline updates eat the reps' afternoons",
+       "field": "notes"
+      },
+      {
+       "fact": "\"the worst 2 hours of the week\"",
+       "field": "conversation"
+      }
+     ],
+     "text": {
+      "top": "FRIDAY PIPELINE UPDATE ARRIVES AT ALL 24 DESKS",
+      "bottom": "HI! I'M THE WORST TWO HOURS OF YOUR WEEK"
+     },
+     "scores": {
+      "funny": 8,
+      "specific": 9,
+      "kind": 9,
+      "glance": 8,
+      "total": 8.45
+     },
+     "gif_kb": 174,
+     "seconds": 25.76,
+     "art_backend": "image"
+    },
+    "headline": {
+     "email_line": "Here's a sneak peek at Northpeak's future Fridays, forward-ready for your CRO.",
+     "alt_text": "A newspaper-style front page from an imagined future edition shows a cheerful sales team relaxing at a sunny loading dock on a Friday afternoon, under a headline about their pipeline staying accurate.",
+     "mechanism": "incongruity",
+     "joke_target": "Friday afternoon pipeline update marathons",
+     "grounding": [
+      {
+       "fact": "Sales team doubled to 24 reps",
+       "field": "notes"
+      },
+      {
+       "fact": "Reps lose Friday afternoons to pipeline updates",
+       "field": "notes"
+      },
+      {
+       "fact": "Friday pipeline updates are 'the worst 2 hours of the week'",
+       "field": "conversation"
+      },
+      {
+       "fact": "Mondays callback from 'a sales team that actually likes Mondays'",
+       "field": "linkedin_headline"
+      },
+      {
+       "fact": "Company name Northpeak",
+       "field": "company"
+      }
+     ],
+     "text": {
+      "publication": "The Backhaul Bugle",
+      "kicker": "Imagined Future Edition",
+      "headline": "Northpeak's 24 Reps Caught Enjoying Friday Afternoon; Pipeline Still Accurate",
+      "dek": "Reps reclaim 'the worst 2 hours of the week'; Monday, as promised, now has fans."
+     },
+     "scores": {
+      "funny": 9,
+      "specific": 9,
+      "kind": 10,
+      "glance": 9,
+      "total": 9.15
+     },
+     "gif_kb": 281,
+     "seconds": 28.42,
+     "art_backend": "image"
+    },
+    "comic": {
+     "email_line": "Made this for your Friday afternoons, Marcus. Feel free to forward it to your CRO if it earns a smile.",
+     "alt_text": "A three-panel illustrated strip of a sticky-note character buried in paperwork on a Friday, then returning a glowing golden afternoon to relieved coworkers.",
+     "mechanism": "incongruity",
+     "joke_target": "Friday afternoon pipeline update marathons",
+     "grounding": [
+      {
+       "fact": "Friday pipeline updates are 'the worst 2 hours of the week'",
+       "field": "conversation"
+      },
+      {
+       "fact": "Reps lose Friday afternoons to pipeline updates",
+       "field": "notes"
+      },
+      {
+       "fact": "Sales team doubled from 12 to 24 reps",
+       "field": "notes"
+      }
+     ],
+     "text": {
+      "captions": [
+       "Friday afternoon. The worst 2 hours of the week begin.",
+       "Twenty-four reps now. Twice the updates. Same two hours, apparently.",
+       "Friday afternoon, returned slightly dusty to its rightful owners."
+      ],
+      "cast": "A small square yellow sticky-note character with two dot eyes, tiny stick arms and legs, and a curled top corner."
+     },
+     "scores": {
+      "funny": 7,
+      "specific": 9,
+      "kind": 9,
+      "glance": 8,
+      "total": 8.1
+     },
+     "gif_kb": 281,
+     "seconds": 31.76,
+     "art_backend": "image"
+    },
+    "card": {
+     "email_line": "Made you a card for the Friday update ordeal. Feel free to forward to your CRO.",
+     "alt_text": "A shimmering holographic collector card featuring a pallet-built eagle dropping a tangled scroll off a mountain cliff, with heroic stats and a special move called Friday 3PM Jailbreak.",
+     "mechanism": "incongruity",
+     "joke_target": "Friday afternoon pipeline update marathons",
+     "grounding": [
+      {
+       "fact": "Friday pipeline updates are 'the worst 2 hours of the week'",
+       "field": "conversation"
+      },
+      {
+       "fact": "Reps lose Friday afternoons to pipeline updates",
+       "field": "notes"
+      },
+      {
+       "fact": "Building a team that likes Mondays",
+       "field": "linkedin_headline"
+      },
+      {
+       "fact": "Rocky Mountain backdrop for Denver",
+       "field": "location"
+      },
+      {
+       "fact": "Pallet-built eagle nods to freight",
+       "field": "industry"
+      },
+      {
+       "fact": "Sales leadership class on the card",
+       "field": "title"
+      }
+     ],
+     "text": {
+      "card_title": "Friday Afternoon Liberator",
+      "card_class": "Sales Floor Commander",
+      "stats": [
+       {
+        "label": "Monday Enthusiasm",
+        "value": 96
+       },
+       {
+        "label": "Quota Instinct",
+        "value": 91
+       },
+       {
+        "label": "Update Tolerance",
+        "value": 62
+       }
+      ],
+      "special_move": {
+       "name": "Friday 3PM Jailbreak",
+       "text": "Dodges the two-hour pipeline update. Reps are suddenly halfway up a mountain."
+      },
+      "flavor": "Building a team that likes Mondays. Fridays remain in negotiations."
+     },
+     "scores": {
+      "funny": 9,
+      "specific": 9,
+      "kind": 9,
+      "glance": 8,
+      "total": 8.8
+     },
+     "gif_kb": 346,
+     "seconds": 31.74,
+     "art_backend": "image"
+    },
+    "reply": {
+     "email_line": "Made this for your \"worst 2 hours of the week\" line. Feel free to forward it to your CRO.",
+     "alt_text": "A row of cheerful cartoon laptops with tiny backpacks look out an office window at a golden Friday sunset, ready to head home early.",
+     "mechanism": "incongruity",
+     "joke_target": "Friday afternoon pipeline update marathons",
+     "grounding": [
+      {
+       "fact": "Friday pipeline updates are \"the worst 2 hours of the week\"",
+       "field": "conversation"
+      },
+      {
+       "fact": "Reps lose Friday afternoons to pipeline updates",
+       "field": "notes"
+      },
+      {
+       "fact": "Asked for something he can forward to his CRO, so the image is a standalone gift with no pitch",
+       "field": "conversation"
+      }
+     ],
+     "text": {
+      "beat1": "Friday's \"worst 2 hours of the week\"...",
+      "beat2": "Plot twist: it finishes, and the sun is still out.",
+      "prop": "progress_bar",
+      "prop_value": "Pipeline update"
+     },
+     "scores": {
+      "funny": 8,
+      "specific": 8,
+      "kind": 10,
+      "glance": 9,
+      "total": 8.5
+     },
+     "gif_kb": 115,
+     "seconds": 26.85,
+     "art_backend": "image"
+    }
+   }
+  }
+ }
+}

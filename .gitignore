@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+.ruff_cache/
+
+# Local environment and secrets
+.venv/
+.env
+.env.*
+!.env.example
+
+# Generated output (GIFs, posters, manifests, ratings)
+out/
+ci-gifs/
+
+# Private notes and real run logs
+docs/private/
+
+# Study participant data and per-run study outputs (see GOVERNANCE.md, data retention)
+study_data/
+results/
+
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/

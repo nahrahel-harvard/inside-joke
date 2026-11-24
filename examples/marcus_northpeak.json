@@ -1,0 +1,14 @@
+{
+  "prospect": {
+    "first_name": "Marcus",
+    "last_name": "Chen",
+    "title": "VP of Sales",
+    "company": "Northpeak Logistics",
+    "industry": "Freight and logistics",
+    "location": "Denver, CO",
+    "linkedin_headline": "Building a sales team that actually likes Mondays.",
+    "notes": "Sales team doubled from 12 to 24 reps this year. Uses Salesforce. Posted that reps lose Friday afternoons to pipeline updates.",
+    "brand_color": "#e2582b"
+  },
+  "context": "On our intro call Marcus said Friday pipeline updates are \"the worst 2 hours of the week\" and asked us to send something he can forward to his CRO."
+}

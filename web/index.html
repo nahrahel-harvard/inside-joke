@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inside Joke</title>
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--ink:#16181d;--muted:#5d6472;--line:#e3e6eb;--accent:#2f6fed;--accent-ink:#fff;--ok:#1d8a4e;--bad:#c2362b;--soft:#eef3fe;--r:12px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 20px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header h1{font-size:18px;margin:0;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);font-size:13px;flex:1;min-width:180px}
+.layout{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:20px;padding:20px;max-width:1440px;margin:0 auto}
+form,.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+form{align-self:start;position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:16px 0 8px}
+h2:first-child{margin-top:0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fld{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.fld label,.lbl{font-size:13px;font-weight:600}
+.req{color:var(--bad)}
+input[type=text],select,textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+textarea{resize:vertical;min-height:64px}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=color]{width:44px;height:36px;padding:2px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.color{display:flex;gap:8px;align-items:center}
+.fmt{display:flex;gap:10px;align-items:flex-start;padding:8px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;cursor:pointer}
+.fmt input{margin-top:3px}
+.fmt b{display:block;font-size:14px}
+.fmt span{display:block;font-size:12px;color:var(--muted)}
+.fmt.off{opacity:.55;cursor:not-allowed}
+.tog{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 12px;cursor:pointer;min-height:36px}
+.btn:hover{background:var(--soft)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600;width:100%;padding:11px;margin-top:10px}
+.btn.primary:disabled{opacity:.6;cursor:progress}
+.btn.sm{padding:4px 10px;min-height:30px;font-size:13px}
+.err{color:var(--bad);font-size:13px;min-height:1em;margin:8px 0 0}
+#status{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;color:var(--muted);font-size:14px}
+#status strong{color:var(--ink)}
+.banner{background:#fff7e0;border:1px solid #f1d58a;color:#5c4400;border-radius:var(--r);padding:10px 14px;margin-bottom:12px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card h3{margin:0;font-size:16px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.pill{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--soft);color:var(--accent);white-space:nowrap}
+.pill.ok{background:#e5f5ec;color:var(--ok)}.pill.bad{background:#fbe9e7;color:var(--bad)}
+.stage{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:p 1s infinite alternate;flex:none}
+@keyframes p{to{opacity:.25}}
+.media{position:relative;background:#f0f1f4;border-radius:8px;overflow:hidden;display:flex;justify-content:center}
+.media img{max-width:100%;height:auto;display:block}
+.aibadge{position:absolute;top:8px;left:8px;background:rgba(22,24,29,.82);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px}
+.line{background:var(--soft);border-radius:8px;padding:10px;display:flex;gap:8px;align-items:flex-start}
+.line p{margin:0;flex:1}
+.alt{font-size:12px;color:var(--muted);margin:0}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:4px 8px;align-items:center;font-size:12px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.dl{display:flex;gap:8px;flex-wrap:wrap}
+.dl a{font-size:13px;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+details{border-top:1px solid var(--line);padding-top:8px;font-size:13px}
+summary{cursor:pointer;font-weight:600}
+details dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px}
+details dt{color:var(--muted)}details dd{margin:0}
+details ul{margin:4px 0 0;padding-left:18px}
+.rate{border-top:1px solid var(--line);padding-top:10px;display:none}
+.study .rate{display:block}
+.rate fieldset{border:0;margin:0 0 8px;padding:0}
+.rate legend{font-size:13px;font-weight:600;margin-bottom:4px}
+.scale{display:flex;gap:4px}
+.scale label{flex:1;text-align:center;font-size:12px;border:1px solid var(--line);border-radius:6px;padding:6px 0;cursor:pointer;min-height:32px}
+.scale input{position:absolute;opacity:0;width:1px;height:1px}
+.scale input:checked+span{font-weight:700}
+.scale label:has(input:checked){background:var(--accent);color:#fff;border-color:var(--accent)}
+.scale label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:1px}
+.hint{font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
+.empty{color:var(--muted);text-align:center;padding:48px 16px;border:1px dashed var(--line);border-radius:var(--r);background:var(--panel)}
+#drawer{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--panel);border-left:1px solid var(--line);box-shadow:-8px 0 24px rgba(0,0,0,.08);transform:translateX(100%);transition:transform .2s;z-index:10;display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#drawer .hd{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+#drawer h2{margin:0}
+#runs{overflow:auto;padding:8px;flex:1}
+.run{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:8px;padding:10px;margin-bottom:6px;cursor:pointer}
+.run:hover{background:var(--soft)}
+.run small{display:block;color:var(--muted);font-size:12px}
+.sw{display:flex;align-items:center;gap:6px;font-size:14px}
+@media (max-width:860px){.layout{grid-template-columns:1fr;padding:12px 16px}form{position:static;max-height:none}.grid{grid-template-columns:1fr}header{padding:12px 16px}}
+@media (max-width:420px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Inside Joke</h1>
+  <p>A personalized GIF for one prospect, written and drawn in under a minute.</p>
+  <label class="sw"><input type="checkbox" id="study"> Study mode</label>
+  <button class="btn" id="openRuns" type="button" aria-controls="drawer" aria-expanded="false">Past runs</button>
+</header>
+
+<div class="layout">
+<form id="f" novalidate>
+  <h2>Prospect</h2>
+  <div class="row">
+    <div class="fld"><label for="first_name">First name <span class="req" aria-hidden="true">*</span></label><input type="text" id="first_name" required maxlength="4000" autocomplete="off"></div>
+    <div class="fld"><label for="last_name">Last name</label><input type="text" id="last_name" maxlength="4000" autocomplete="off"></div>
+  </div>
+  <div class="fld"><label for="title">Title <span class="req" aria-hidden="true">*</span></label><input type="text" id="title" required maxlength="4000" placeholder="VP of Supply Chain"></div>
+  <div class="row">
+    <div class="fld"><label for="company">Company <span class="req" aria-hidden="true">*</span></label><input type="text" id="company" required maxlength="4000"></div>
+    <div class="fld"><label for="domain">Domain</label><input type="text" id="domain" maxlength="4000" placeholder="acme.com"></div>
+  </div>
+  <div class="row">
+    <div class="fld"><label for="industry">Industry</label><input type="text" id="industry" maxlength="4000"></div>
+    <div class="fld"><label for="location">Location</label><input type="text" id="location" maxlength="4000"></div>
+  </div>
+  <div class="fld"><label for="linkedin_headline">LinkedIn headline</label><input type="text" id="linkedin_headline" maxlength="4000"></div>
+  <div class="fld"><label for="notes">Notes</label><textarea id="notes" maxlength="4000" placeholder="Anything specific: a post they wrote, a launch, a hiring push"></textarea></div>
+  <div class="fld"><label for="brand_color">Brand color</label><div class="color"><input type="color" id="brand_color" value="#2f6fed"><span id="brand_hex" aria-hidden="true">#2f6fed</span></div></div>
+  <div class="fld"><label for="context">Conversation context</label><textarea id="context" maxlength="4000" rows="3" placeholder="Paste their reply or call notes (optional, unlocks Reply Reaction)"></textarea></div>
+
+  <h2 id="fmtH">Formats</h2>
+  <div id="fmts" role="group" aria-labelledby="fmtH"></div>
+
+  <h2>Options</h2>
+  <div class="fld"><label for="art">Art</label>
+    <select id="art">
+      <option value="auto">Auto (image model, falls back to SVG)</option>
+      <option value="image">Image model only</option>
+      <option value="svg">SVG drawing</option>
+      <option value="placeholder">Placeholder art (no model call)</option>
+    </select></div>
+  <label class="tog"><input type="checkbox" id="fast"> Fast mode (cheaper writer, no judge)</label>
+  <label class="tog"><input type="checkbox" id="research"> Read their homepage first</label>
+  <button class="btn primary" id="go" type="submit">Generate</button>
+  <p class="err" id="err" role="alert"></p>
+</form>
+
+<section aria-labelledby="resH">
+  <h2 id="resH" class="sr" style="position:absolute;left:-9999px">Results</h2>
+  <div id="banner" class="banner" hidden>Made with AI</div>
+  <div id="status" aria-live="polite"></div>
+  <div id="grid" class="grid"><div class="empty">Fill in a prospect and press Generate. Each format shows up here as it renders.</div></div>
+</section>
+</div>
+
+<aside id="drawer" aria-label="Past runs" aria-hidden="true">
+  <div class="hd"><h2>Past runs</h2><button class="btn sm" id="closeRuns" type="button">Close</button></div>
+  <div id="runs"></div>
+</aside>
+
+<script>
+const FMT={meme:["Meme Desk","Setup on top, punchline drops in."],headline:["Future Headline","A trade-paper front page dated 6 months ahead."],comic:["Three-Panel Day","3 panels about one real pain from their role."],card:["Collector Card","A shimmering card with stats and a special move."],reply:["Reply Reaction","Reacts to what they said in the thread."]};
+const ORDER=["meme","headline","comic","card","reply"];
+const STAGE={research:"Reading their homepage",concept:"Writing jokes",art:"Drawing art",render:"Animating the GIF",done:"Done",error:"Failed"};
+const RATE=[["funny","Funny"],["thoughtful","Thoughtful"],["creepy","Creepy"],["would_reply","I would reply"]];
+const $=s=>document.querySelector(s);
+function h(t,a,...k){const e=document.createElement(t);for(const[n,v]of Object.entries(a||{})){if(v==null||v===false)continue;if(n==="text")e.textContent=v;else if(n.startsWith("on"))e.addEventListener(n.slice(2),v);else e.setAttribute(n,v===true?"":v)}for(const c of k.flat())if(c!=null&&c!==false)e.append(c.nodeType?c:document.createTextNode(String(c)));return e}
+function store(kind,key,val){try{const s=window[kind];if(val===undefined)return s.getItem(key);s.setItem(key,val)}catch(e){return null}}
+const DISC=(()=>{let d=store("sessionStorage","ij_disc");if(d!=="ai_disclosed"&&d!=="not_disclosed"){d=Math.random()<.5?"ai_disclosed":"not_disclosed";store("sessionStorage","ij_disc",d)}return d})();
+const RATER=(()=>{let r=store("localStorage","ij_rater");if(!r||!/^[A-Za-z0-9_-]{1,40}$/.test(r)){r="r"+Math.random().toString(36).slice(2,10);store("localStorage","ij_rater",r)}return r})();
+
+// formats
+const fmtBox=$("#fmts");
+for(const id of ORDER){const cb=h("input",{type:"checkbox",name:"fmt",value:id,id:"fmt_"+id});if(id!=="reply")cb.checked=true;
+  fmtBox.append(h("label",{class:"fmt",for:"fmt_"+id,id:"lab_"+id},cb,h("div",{},h("b",{text:FMT[id][0]}),h("span",{text:FMT[id][1],id:"pitch_"+id}))))}
+function syncReply(){const has=$("#context").value.trim().length>0,cb=$("#fmt_reply");cb.disabled=!has;if(!has)cb.checked=false;
+  $("#lab_reply").classList.toggle("off",!has);$("#pitch_"+"reply").textContent=has?FMT.reply[1]:"Add conversation context above to turn this on."}
+$("#context").addEventListener("input",syncReply);syncReply();
+$("#brand_color").addEventListener("input",e=>$("#brand_hex").textContent=e.target.value);
+
+// study mode
+const study=$("#study");study.checked=store("localStorage","ij_study")==="1";
+function syncStudy(){document.body.classList.toggle("study",study.checked);$("#banner").hidden=!(study.checked&&DISC==="ai_disclosed");store("localStorage","ij_study",study.checked?"1":"0");
+  document.querySelectorAll(".aibadge").forEach(b=>b.hidden=!(study.checked&&DISC==="ai_disclosed"))}
+study.addEventListener("change",syncStudy);syncStudy();
+
+// generate
+let pollT=null,clockT=null;
+$("#f").addEventListener("submit",async e=>{e.preventDefault();$("#err").textContent="";
+  const p={};for(const k of["first_name","last_name","title","company","domain","industry","location","linkedin_headline","notes","brand_color"])p[k]=$("#"+k).value.trim();
+  for(const k of["first_name","title","company"])if(!p[k]){$("#err").textContent="First name, title and company are required.";$("#"+k).focus();return}
+  const formats=[...document.querySelectorAll("input[name=fmt]:checked")].map(x=>x.value);
+  if(!formats.length){$("#err").textContent="Pick at least one format.";return}
+  const body={prospect:p,formats,context:$("#context").value.trim()||null,art:$("#art").value,fast:$("#fast").checked,research:$("#research").checked};
+  $("#go").disabled=true;$("#go").textContent="Generating...";
+  try{const r=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});const j=await r.json();
+    if(!r.ok)throw new Error(j.error||("Server returned "+r.status));startJob(j.job_id,formats)}
+  catch(x){$("#err").textContent=x.message;resetBtn()}});
+function resetBtn(){$("#go").disabled=false;$("#go").textContent="Generate"}
+
+function startJob(id,formats){clearTimeout(pollT);clearInterval(clockT);const grid=$("#grid");grid.innerHTML="";
+  for(const f of formats)grid.append(h("article",{class:"card",id:"card_"+f},h("h3",{},FMT[f][0],h("span",{class:"pill",text:"Queued"})),h("div",{class:"stage"},h("span",{class:"dot"}),h("span",{text:"Waiting to start"}))));
+  const t0=Date.now();setStatus("Running",0);clockT=setInterval(()=>setStatus("Running",(Date.now()-t0)/1000),500);poll(id)}
+function setStatus(word,sec,extra){$("#status").replaceChildren(h("strong",{text:word}),h("span",{text:sec.toFixed(1)+" s"}),extra||"")}
+async function poll(id){let j;try{const r=await fetch("/api/jobs/"+id,{cache:"no-store"});j=await r.json();if(!r.ok)throw new Error(j.error||"Lost the job")}
+  catch(x){pollT=setTimeout(()=>poll(id),1600);return}
+  const last={};let glob=null;for(const ev of j.events||[]){if(ev.format)last[ev.format]=ev;else glob=ev}
+  for(const[f,ev]of Object.entries(last)){const c=document.getElementById("card_"+f);if(!c||c.dataset.done)continue;
+    c.querySelector(".stage").replaceChildren(ev.stage==="done"||ev.stage==="error"?"":h("span",{class:"dot"}),h("span",{text:(STAGE[ev.stage]||ev.stage)+(ev.message?": "+ev.message:"")}));
+    c.querySelector(".pill").textContent=STAGE[ev.stage]||ev.stage}
+  if(j.status==="running"){if(glob)$("#status").title=glob.message||"";pollT=setTimeout(()=>poll(id),800);return}
+  clearInterval(clockT);resetBtn();
+  if(j.status==="error"){setStatus("Failed",0,h("span",{text:j.error||"Unknown error"}));
+    document.querySelectorAll(".card").forEach(c=>{if(!c.dataset.done){c.querySelector(".stage").replaceChildren(h("span",{text:"Stopped: "+(j.error||"error")}));c.querySelector(".pill").className="pill bad";c.querySelector(".pill").textContent="Failed"}});return}
+  renderManifest(j.manifest)}
+
+function runName(m){return String(m.out_dir||"").replace(/[\\/]+$/,"").split(/[\\/]/).pop()}
+function renderManifest(m){const run=runName(m),res=m.results||{},grid=$("#grid");grid.innerHTML="";
+  const fs=ORDER.filter(f=>res[f]).concat(Object.keys(res).filter(f=>!ORDER.includes(f)));
+  const okN=fs.filter(f=>res[f].ok).length,p=m.prospect||{};
+  setStatus(okN+" of "+fs.length+" ready",Number(m.total_seconds||0),h("span",{text:[p.first_name,p.last_name].filter(Boolean).join(" ")+" at "+(p.company||"")+(m.cost_usd!=null?" · $"+Number(m.cost_usd).toFixed(3):"")}));
+  if(!fs.length)grid.append(h("div",{class:"empty",text:"This run has no results."}));
+  for(const f of fs)grid.append(card(run,f,res[f]));syncStudy()}
+
+function scoreOf(r){const s=r.scores||{},id=(r.concept||{}).id;if(id&&s[id])return s[id];if(s.funny!=null)return s;return null}
+function card(run,f,r){const name=(FMT[f]||[f])[0],base="/out/"+encodeURIComponent(run)+"/";
+  const c=h("article",{class:"card","data-done":"1"},h("h3",{},name,h("span",{class:"pill "+(r.ok?"ok":"bad"),text:r.ok?"Ready":"Failed"})));
+  if(!r.ok){c.append(h("p",{class:"err",text:r.error||"This format did not render."}));return c}
+  const alt=r.alt_text||(name+" GIF");
+  c.append(h("div",{class:"media"},h("img",{src:base+encodeURIComponent(r.gif),alt,loading:"lazy"}),h("span",{class:"aibadge",text:"Made with AI",hidden:true})));
+  if(r.email_line){const btn=h("button",{class:"btn sm",type:"button",text:"Copy","aria-label":"Copy email line",onclick:async()=>{try{await navigator.clipboard.writeText(r.email_line);btn.textContent="Copied"}catch(e){btn.textContent="Select and copy"}setTimeout(()=>btn.textContent="Copy",1500)}});
+    c.append(h("div",{class:"line"},h("p",{text:r.email_line}),btn))}
+  c.append(h("p",{class:"alt"},h("b",{text:"Alt text: "}),alt));
+  const s=scoreOf(r);
+  if(s){const b=h("div",{class:"bars","aria-label":"Judge scores out of 10"});for(const k of["funny","specific","kind","glance"]){const v=Math.max(0,Math.min(10,Number(s[k])||0));
+      b.append(h("span",{text:k}),h("div",{class:"bar",role:"img","aria-label":k+" "+v+" of 10"},h("i",{style:"width:"+v*10+"%"})),h("span",{text:v}))}c.append(b)}
+  else c.append(h("p",{class:"alt",text:"No judge scores for this run."}));
+  c.append(h("div",{class:"meta"},h("span",{text:"Art: "+(r.art_backend||"unknown")}),h("span",{text:Number(r.seconds||0).toFixed(1)+" s"}),h("span",{text:(r.gif_kb??"?")+" KB"})));
+  c.append(h("div",{class:"dl"},h("a",{href:base+encodeURIComponent(r.gif),download:run+"-"+f+".gif",text:"Download GIF"}),r.png?h("a",{href:base+encodeURIComponent(r.png),download:run+"-"+f+".png",text:"Download PNG poster"}):null));
+  const k=r.concept||{},g=(k.grounding||[]).map(x=>h("li",{text:typeof x==="string"?x:(x.fact||"")+(x.field?" (from "+x.field+")":"")}));
+  c.append(h("details",{},h("summary",{text:"Why this joke"}),h("dl",{},h("dt",{text:"Mechanism"}),h("dd",{text:k.mechanism||"n/a"}),h("dt",{text:"Teasing"}),h("dd",{text:k.joke_target||"n/a"}),h("dt",{text:"Based on"}),h("dd",{},g.length?h("ul",{},g):"n/a"),
+    h("dt",{text:"Drafts"}),h("dd",{text:(r.candidates||[]).length+" passed, "+(r.rejected||[]).length+" rejected"}))));
+  c.append(rateBox(run,f));return c}
+
+function rateBox(run,f){const box=h("form",{class:"rate"}),msg=h("p",{class:"alt","aria-live":"polite"});
+  for(const[k,lab]of RATE){const sc=h("div",{class:"scale"});for(let i=1;i<=7;i++)sc.append(h("label",{},h("input",{type:"radio",name:k,value:i,"aria-label":lab+" "+i+" of 7"}),h("span",{text:i})));
+    box.append(h("fieldset",{},h("legend",{text:lab}),sc,h("div",{class:"hint"},h("span",{text:"1 not at all"}),h("span",{text:"7 very"}))))}
+  const btn=h("button",{class:"btn sm",type:"submit",text:"Save rating"});box.append(btn,msg);
+  box.addEventListener("submit",async e=>{e.preventDefault();const ratings={};
+    for(const[k,lab]of RATE){const v=box.querySelector("input[name="+k+"]:checked");if(!v){msg.textContent="Rate "+lab.toLowerCase()+" first.";return}ratings[k]=Number(v.value)}
+    btn.disabled=true;try{const r=await fetch("/api/rate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({run,format:f,ratings,disclosure:DISC,rater_id:RATER})});const j=await r.json();
+      if(!r.ok)throw new Error(j.error);msg.textContent="Saved. Thank you."}catch(x){msg.textContent="Not saved: "+x.message;btn.disabled=false}});
+  return box}
+
+// past runs
+const drawer=$("#drawer");
+function setDrawer(o){drawer.classList.toggle("open",o);drawer.setAttribute("aria-hidden",String(!o));$("#openRuns").setAttribute("aria-expanded",String(o));if(o){loadRuns();$("#closeRuns").focus()}}
+$("#openRuns").onclick=()=>setDrawer(true);$("#closeRuns").onclick=()=>setDrawer(false);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&drawer.classList.contains("open"))setDrawer(false)});
+async function loadRuns(){const box=$("#runs");box.replaceChildren(h("p",{class:"alt",text:"Loading..."}));
+  try{const j=await(await fetch("/api/runs",{cache:"no-store"})).json();box.replaceChildren();
+    if(!j.runs.length)box.append(h("p",{class:"alt",text:"No runs yet."}));
+    for(const r of j.runs)box.append(h("button",{class:"run",type:"button",onclick:()=>openRun(r.run)},h("b",{text:(r.company||"Unknown")+(r.name?", "+r.name:"")}),h("small",{text:fmtDate(r.created)}),
+      h("small",{text:(r.formats_ok.length?r.formats_ok.map(f=>(FMT[f]||[f])[0]).join(", "):"No formats ready")+(r.formats_failed.length?" · "+r.formats_failed.length+" failed":"")})))}
+  catch(x){box.replaceChildren(h("p",{class:"err",text:"Could not load runs."}))}}
+function fmtDate(s){const d=new Date(s);return isNaN(d)?String(s||""):d.toLocaleString()}
+async function openRun(run){try{const r=await fetch("/out/"+encodeURIComponent(run)+"/manifest.json",{cache:"no-store"});if(!r.ok)throw 0;const m=await r.json();if(!m.out_dir)m.out_dir=run;else if(runName(m)!==run)m.out_dir=run;
+  clearTimeout(pollT);clearInterval(clockT);renderManifest(m);setDrawer(false)}catch(e){$("#runs").prepend(h("p",{class:"err",text:"Could not open that run."}))}}
+</script>
+</body>
+</html>
